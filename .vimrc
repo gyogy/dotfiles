@@ -32,6 +32,7 @@ set incsearch
 set nowrap
 set textwidth=79
 set colorcolumn=80
+set termguicolors
 
 " TITLE BAR
 set title
