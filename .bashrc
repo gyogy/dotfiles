@@ -96,7 +96,7 @@ xterm*|rxvt*)
     ;;
 esac
 
-PS1='\[\e[32m\]\u\[\e[93m\] at \[\e[32m\]\h \[\e[94m\]\W \[\e[36m\]$(git_prompt_info)\[\e[0m\]\n\$'
+PS1='\[\e[32m\]\u\[\e[93m\] at \[\e[32m\]\h \[\e[94m\]\w \[\e[36m\]$(git_prompt_info)\[\e[0m\]\n\$'
 
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
@@ -126,3 +126,4 @@ if ! shopt -oq posix; then
 fi
 
 EDITOR=vim
+
