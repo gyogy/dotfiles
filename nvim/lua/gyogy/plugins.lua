@@ -6,6 +6,13 @@ require('packer').startup(function(use)
     use 'saadparwaiz1/cmp_luasnip'
     use 'tpope/vim-fugitive'
     use 'kyazdani42/nvim-tree.lua'
+    use 'nvim-tree/nvim-web-devicons.lua'
     use 'tiagovla/tokyodark.nvim'
-    use 'nvim-treesitter/nvim-treesitter'  -- This line should be present
+    use 'navarasu/onedark.nvim'
+    use 'nvim-treesitter/nvim-treesitter'
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'nvim-tree/nvim-web-devicons' }
+    }
 end)
+

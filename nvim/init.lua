@@ -1,5 +1,7 @@
 vim.g.mapleader = " "
-vim.env.PATH = vim.env.PATH .. ':/usr/bin'
+
+-- open terminal in bottom right
+vim.api.nvim_set_keymap('n', '<Leader>t', ':10 split | term<CR>', { noremap = true, silent = true })
 
 require('gyogy')
 

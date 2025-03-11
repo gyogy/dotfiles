@@ -5,6 +5,7 @@ require('gyogy.keymaps')
 require('gyogy.colorscheme')
 require('gyogy.treesitter')
 require('gyogy.nvim-tree')
+require('gyogy.lualine')
 
 -- Stop pretending you're vi
 vim.opt.compatible = false

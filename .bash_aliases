@@ -12,11 +12,12 @@ fi
 
 # some more ls aliases
 alias ll='ls -alF'
-alias la='ls -A'
+alias la='ls -lah'
 alias l='ls -CF'
 
 # python
-alias py='ipython3'
+alias py='python3'
+alias ipy='ipython3'
 alias pip='pip3'
 
 # git
