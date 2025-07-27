@@ -108,7 +108,12 @@ git remote add origin git@github.com:gyogy/dotfiles.git
 
 echo "[+] Bootstrapping Neovim plugins..."
 #nvim --headless +"autocmd User PackerComplete quitall" +PackerSync
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+#nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+if [ ! -d "$HOME/.local/share/nvim/site/pack/packer/start" ]; then
+    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerInstall'
+else
+    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+fi
 
 source ~/.bashrc
 echo "[+] Done."
