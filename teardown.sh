@@ -44,7 +44,7 @@ if [ -d "$HOME/.local/share/nvim" ]; then
 fi
 
 # Optional: remove Neovim
-read -p "Remove Neovim (leave Git)? (y/N): " confirm_nvim
+read -p "Remove Neovim? (y/N): " confirm_nvim
 if [[ "$confirm_nvim" == "y" || "$confirm_nvim" == "Y" ]]; then
     echo "[-] Removing Neovim via apt..."
     sudo apt remove --purge -y neovim
