@@ -28,5 +28,14 @@ return require("packer").startup(function(use)
             vim.cmd.colorscheme("tokyodark")
         end
     }
+    use {
+        "nvim-tree/nvim-tree.lua",
+        requires = {
+            "nvim-tree/nvim-web-devicons", -- optional, for file icons
+        },
+        config = function()
+            require("nvim-tree").setup({})
+        end
+    }
 end)
 
