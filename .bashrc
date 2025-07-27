@@ -86,3 +86,6 @@ fi
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 [ -f ~/.bash_functions ] && source ~/.bash_functions
 
+# vim motions in terminal
+set -o vi
+
