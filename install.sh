@@ -18,15 +18,16 @@ version_ge() {
     dpkg --compare-versions "$1" ge "$2"
 }
 
+get_apt_nvim_version() {
+    apt-cache policy neovim | grep Candidate | awk '{print $2}' | cut -d'-' -f1
+}
+
 install_nvim_from_github() {
     echo "[+] Installing Neovim from GitHub..."
-
     sudo apt install -y curl tar gzip jq
-
     tmp_dir=$(mktemp -d)
     cd "$tmp_dir"
 
-    echo "[+] Fetching latest release URL from GitHub..."
     LATEST_URL=$(curl -s https://api.github.com/repos/neovim/neovim/releases/latest | \
         jq -r '.assets[] | select(.browser_download_url | test("nvim-linux-x86_64.tar.gz$")) | .browser_download_url')
 
@@ -35,13 +36,8 @@ install_nvim_from_github() {
         exit 1
     fi
 
-    echo "[+] Downloading Neovim from: $LATEST_URL"
     curl -LO "$LATEST_URL"
-
-    echo "[+] Extracting archive..."
     tar xzf nvim-linux-x86_64.tar.gz
-
-    echo "[+] Installing to /opt and linking to /usr/bin..."
     sudo mv nvim-linux-x86_64 /opt/
     sudo ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/bin/nvim
 
@@ -55,18 +51,21 @@ check_nvim_install() {
 
     if version_ge "$CURRENT_VER" "$NVIM_MIN_VERSION"; then
         echo "[+] Neovim meets minimum version requirement."
-    else
-        echo "[!] Neovim too old or not installed. Checking apt..."
-        sudo apt update
-        sudo apt install -y neovim || true
+        return
+    fi
 
-        CURRENT_VER=$(get_nvim_version)
-        if version_ge "$CURRENT_VER" "$NVIM_MIN_VERSION"; then
-            echo "[+] Successfully updated Neovim via apt."
-        else
-            echo "[!] Apt version too old or missing. Installing from GitHub..."
-            install_nvim_from_github
-        fi
+    echo "[!] Neovim too old or not installed. Checking apt..."
+    sudo apt update
+
+    APT_VER=$(get_apt_nvim_version)
+    echo "[-] Available in apt: $APT_VER"
+
+    if version_ge "$APT_VER" "$NVIM_MIN_VERSION"; then
+        echo "[+] Installing Neovim via apt..."
+        sudo apt install -y neovim
+    else
+        echo "[!] Apt version too old. Installing from GitHub..."
+        install_nvim_from_github
     fi
 }
 
@@ -105,15 +104,10 @@ echo "[+] Setting up SSH remote for git..."
 cd "$DF_DIR"
 git remote remove origin 2>/dev/null || true
 git remote add origin git@github.com:gyogy/dotfiles.git
+git push --set-upstream origin master || true
 
 echo "[+] Bootstrapping Neovim plugins..."
-#nvim --headless +"autocmd User PackerComplete quitall" +PackerSync
-#nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-if [ ! -d "$HOME/.local/share/nvim/site/pack/packer/start" ]; then
-    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerInstall'
-else
-    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-fi
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerInstall | PackerSync'
 
 source ~/.bashrc
 echo "[+] Done."
