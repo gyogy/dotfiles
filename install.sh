@@ -107,7 +107,7 @@ git remote remove origin 2>/dev/null || true
 git remote add origin git@github.com:gyogy/dotfiles.git
 
 echo "[+] Bootstrapping Neovim plugins..."
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+nvim --headless +"autocmd User PackerComplete quitall" +PackerSync
 
 source ~/.bashrc
 echo "[+] Done."
