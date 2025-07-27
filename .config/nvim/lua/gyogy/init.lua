@@ -50,17 +50,6 @@ vim.opt.statusline = "%!getcwd()"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
--- REMAPS
-vim.api.nvim_set_keymap('i', 'kj', '<Esc>', { noremap = true })
-vim.api.nvim_set_keymap('v', 'kj', '<Esc>', { noremap = true })
-vim.api.nvim_set_keymap('c', 'kj', '<C-C>', { noremap = true })
-
--- Quicker split movement
-vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true })
-
 -- Set timeout in insert mode
 vim.opt.timeoutlen = 500
 
