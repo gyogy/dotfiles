@@ -1,0 +1,12 @@
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# prompt formula 
+PS1='\[\e[32m\]\u\[\e[93m\] at \[\e[32m\]\h \[\e[94m\]\w \[\e[36m\]$(git_prompt_info)\[\e[0m\]\n\$'
+
+EDITOR=vim
