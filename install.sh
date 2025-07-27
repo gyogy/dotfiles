@@ -3,8 +3,8 @@
 backup_if_needed() {
     local target="$1"
     if [ -e "$HOME/$target" ] && [ ! -L "$HOME/$target" ]; then
-        echo "[-] Backing up existing $target to ${target}_backup"
-        mv "$HOME/$target" "$HOME/${target}_backup"
+        echo "[-] Backing up existing $target to ${target}.backup"
+        mv "$HOME/$target" "$HOME/${target}.backup"
     fi
 }
 

@@ -17,7 +17,7 @@ TARGETS=(
 # Remove symlinks and restore backups if present
 for file in "${TARGETS[@]}"; do
     full="$HOME/$file"
-    backup="$HOME/${file}_backup"
+    backup="$HOME/${file}.backup"
     
     if [ -L "$full" ]; then
         echo "[-] Removing symlink: $file"
@@ -25,7 +25,7 @@ for file in "${TARGETS[@]}"; do
     fi
 
     if [ -e "$backup" ]; then
-        echo "[+] Restoring backup: ${file}_backup → $file"
+        echo "[+] Restoring backup: ${file}.backup → $file"
         mv "$backup" "$full"
     fi
 done
