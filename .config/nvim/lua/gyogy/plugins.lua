@@ -18,4 +18,15 @@ vim.cmd([[
 -- Plugin list
 return require("packer").startup(function(use)
     use "wbthomason/packer.nvim" -- the packet manager
+    use {
+        "tiagovla/tokyodark.nvim",
+        config = function()
+            require("tokyodark").setup({
+                transparent_background = false,
+                gamma = 1.0,
+            })
+            vim.cmd.colorscheme("tokyodark")
+        end
+    }
 end)
+
