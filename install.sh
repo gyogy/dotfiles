@@ -107,7 +107,7 @@ git remote add origin git@github.com:gyogy/dotfiles.git
 git push --set-upstream origin master || true
 
 echo "[+] Bootstrapping Neovim plugins..."
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerInstall | PackerSync'
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'lua require("packer").startup(function(use) use "wbthomason/packer.nvim" end)' -c 'PackerInstall' -c 'PackerSync'
 
 source ~/.bashrc
 echo "[+] Done."

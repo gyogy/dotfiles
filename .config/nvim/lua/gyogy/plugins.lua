@@ -37,17 +37,18 @@ require("packer").startup(function(use)
     if packer_bootstrap then
         print("[packer] Bootstrapping... restart Neovim when done.")
         require("packer").sync()
-        return
     end
 end)
 
--- Only load configs if not bootstrapping
+-- Delay loading plugin configs if packer is bootstrapping
 if not packer_bootstrap then
-    require("gyogy.lsp")
-    require("gyogy.cmp")
-    require("gyogy.keymaps")
-    require("gyogy.colorscheme")
-    require("gyogy.treesitter")
-    require("gyogy.nvim-tree")
-    require("gyogy.lualine")
+    vim.schedule(function()
+        require("gyogy.lsp")
+        require("gyogy.cmp")
+        require("gyogy.keymaps")
+        require("gyogy.colorscheme")
+        require("gyogy.treesitter")
+        require("gyogy.nvim-tree")
+        require("gyogy.lualine")
+    end)
 end
