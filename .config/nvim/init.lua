@@ -1,4 +1,2 @@
-require("gyogy")
-require("gyogy.keymaps")
-require("gyogy.plugins")
+require("config.lazy")
 
