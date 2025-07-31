@@ -1,0 +1,11 @@
+TODO
+
+symlinks and backup of original files
+describe and install dependencies
+
+# DEPENDENCIES
+# For nvim lsp
+npm install pyright
+
+# For tmux copy to buffer shortcut
+sudo apt install wl-clipboard
