@@ -1,10 +1,7 @@
 TODO
 
-#symlinks and backup of original files
-#describe and install dependencies
-#connect nvim to llm api
-    curl, jq, node, and npm installed
-    https://platform.openai.com/account/api-keys
+1. symlinks and backup of original files
+2. describe and install dependencies
 
 # DEPENDENCIES
 # For nvim lsp
