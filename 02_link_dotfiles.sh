@@ -4,7 +4,7 @@ set -euo pipefail
 DOTFILES_DIR="$HOME/dotfiles"
 HOME_DIR="$HOME"
 
-ITEMS=(.bash_envvars .bash_functions .bashrc .tmux.conf .vimrc .config/nvim)
+ITEMS=(.bash_aliases .bash_envvars .bash_functions .bashrc .tmux.conf .vimrc .config/nvim)
 
 timestamp() { date +"%Y%m%d-%H%M%S"; }
 
