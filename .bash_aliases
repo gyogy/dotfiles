@@ -1,4 +1,5 @@
 alias vim=nvim
+alias svim='sudo -E nvim'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
