@@ -123,10 +123,45 @@ ensure_pyright() {
     echo "pyright installed ($(pyright --version 2>/dev/null || echo unknown))."
 }
 
+ensure_fzf() {
+    local comp_sys="/usr/share/doc/fzf/examples/completion.bash"
+    local kb_sys="/usr/share/doc/fzf/examples/key-bindings.bash"
+    local tmpfile
+
+    if command -v fzf >/dev/null 2>&1; then
+        echo "fzf already installed ($(fzf --version | awk 'NR==1'))."
+    else
+        require_sudo
+        sudo apt update
+        sudo apt -y install fzf curl
+        echo "fzf installed."
+    fi
+
+    # Ensure completion script exists at the path sourced in your bashrc
+    if [ ! -f "$comp_sys" ]; then
+        echo "completion.bash not found at $comp_sys. Installing fallback there..."
+        require_sudo
+        tmpfile="$(mktemp)"
+        curl -fsSL -o "$tmpfile" https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.bash
+        sudo install -D -m 0644 "$tmpfile" "$comp_sys"
+        rm -f "$tmpfile"
+        echo "Installed fzf completion to $comp_sys."
+    else
+        echo "Found fzf completion at $comp_sys."
+    fi
+
+    if [ -f "$kb_sys" ]; then
+        echo "Found fzf keybindings at $kb_sys."
+    else
+        echo "NOTE: $kb_sys not found."
+    fi
+}
+
 main() {
     ensure_nvim_010_plus
     ensure_tmux
     ensure_pyright
+    ensure_fzf
     echo "All set."
 }
 

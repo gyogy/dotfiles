@@ -89,3 +89,8 @@ fi
 # vim motions in terminal
 set -o vi
 
+# FZF setup
+export FZF_COMPLETION_TRIGGER=""
+source /usr/share/doc/fzf/examples/completion.bash
+source /usr/share/doc/fzf/examples/key-bindings.bash
+
