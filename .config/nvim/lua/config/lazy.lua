@@ -44,6 +44,11 @@ vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true })
 -- Stop pretending you're vi
 vim.opt.compatible = false
 
+-- Keep vim motions when inserting/ searching Bulgariain
+vim.opt.keymap = "bulgarian-phonetic"
+vim.opt.iminsert = 0
+vim.opt.imsearch = 0
+
 -- SYNTAX
 vim.cmd("syntax enable")
 vim.cmd("filetype plugin on")
