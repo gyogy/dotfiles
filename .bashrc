@@ -91,6 +91,6 @@ set -o vi
 
 # FZF setup
 export FZF_COMPLETION_TRIGGER=""
-source /usr/share/doc/fzf/examples/completion.bash
+source /usr/share/bash-completion/completions/fzf
 source /usr/share/doc/fzf/examples/key-bindings.bash
 
