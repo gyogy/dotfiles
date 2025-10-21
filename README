@@ -1,0 +1,11 @@
+## THINGS I DID TO MOD MY GNOME AND DEBIAN
+1. Set up custom terminal shortcut
+2. Change Alt+Tab to switch windows, instead of apps in keyboard settings.
+3. in Firefox about:config
+    gfx.webrender.all set to "true"
+    layers.acceleration.force-enabled set to "true"
+4. Enable tap-to-click with
+    gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
+5. Install Extentions Manager and add Dash to Panel.
+6. In Tweaks, show minimize and maximize buttons, if hidden.
+
