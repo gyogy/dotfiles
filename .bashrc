@@ -88,6 +88,10 @@ fi
 
 # vim motions in terminal
 set -o vi
+# Keep clear screen shortcut
+bind -m vi-insert '"\C-l": clear-screen'
+bind -m vi-command '"\C-l": clear-screen'
+
 
 # FZF setup
 export FZF_COMPLETION_TRIGGER=""
