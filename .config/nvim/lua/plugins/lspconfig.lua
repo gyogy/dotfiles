@@ -2,6 +2,8 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-        require("lspconfig").pyright.setup {}
-    end
+        -- new API
+        vim.lsp.config["pyright"].setup({})
+    end,
 }
+
