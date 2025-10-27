@@ -2,8 +2,11 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-        -- new API
-        vim.lsp.config["pyright"].setup({})
+        vim.lsp.config.pyright = {
+            cmd = { "pyright-langserver", "--stdio" },
+            filetypes = { "python" },
+            root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git" },
+        }
+        vim.lsp.start(vim.lsp.config.pyright)
     end,
 }
-
