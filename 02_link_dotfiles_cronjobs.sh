@@ -4,7 +4,11 @@ set -euo pipefail
 DOTFILES_DIR="$HOME/dotfiles"
 HOME_DIR="$HOME"
 
-ITEMS=(.bash_aliases .bash_envvars .bash_functions .bashrc .tmux.conf .vimrc .config/nvim)
+# Dynamically detect top-level hidden files, excluding .git*
+mapfile -t ITEMS < <(find "$DOTFILES_DIR" -maxdepth 1 -type f -name ".*" ! -name ".git*" -printf "%f\n")
+
+# Add special subpaths (nested configs)
+ITEMS+=(".config/nvim")
 
 timestamp() { date +"%Y%m%d-%H%M%S"; }
 
@@ -42,8 +46,26 @@ link_item() {
 
     if backup_needed "$target_path" "$source_path"; then
         ln -s -- "$source_path" "$target_path"
-        echo "→ Linked: $target_path -> $source_path"
+        echo "linked $relative_path"
     fi
+}
+
+link_cronjobs() {
+    for d in "$DOTFILES_DIR"/etc/cron*; do
+        [ -d "$d" ] || continue
+        local target_dir="/etc/$(basename "$d")"
+        for f in "$d"/*; do
+            [ -f "$f" ] || continue
+            local relpath="$(basename "$(dirname "$f")")/$(basename "$f")"
+            local source_path="$f"
+            local target_path="$target_dir/$(basename "$f")"
+
+            if backup_needed "$target_path" "$source_path"; then
+                sudo ln -s -- "$source_path" "$target_path"
+                echo "linked $relpath"
+            fi
+        done
+    done
 }
 
 mkdir -p -- "$HOME_DIR/.config"
@@ -52,5 +74,6 @@ for item in "${ITEMS[@]}"; do
     link_item "$item"
 done
 
-echo "Done."
+link_cronjobs
 
+echo "Done."
