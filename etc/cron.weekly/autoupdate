@@ -1,0 +1,14 @@
+#!/bin/bash
+# Weekly system update and upgrade with logging and mail
+
+LOGFILE="/var/log/apt/autoupdate.log"
+
+{
+    echo "===== $(date): Starting weekly system update ====="
+    apt update -y
+    apt upgrade -y
+    apt clean
+    echo "===== $(date): Finished ====="
+    echo
+} >> "$LOGFILE" 2>&1
+
