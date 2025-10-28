@@ -1,6 +1,7 @@
 alias diff='diff color=always'
-alias vim=nvim
 alias svim='sudo -E nvim'
+alias pd=pushd
+alias vim=nvim
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
