@@ -121,3 +121,11 @@ require("lazy").setup({
   rocks = { enabled = false }
 })
 
+-- Auto-update
+vim.api.nvim_create_autocmd("User", {
+    pattern = "LazyCheck",
+    callback = function()
+        require("lazy").update({ show = false })
+    end,
+})
+
